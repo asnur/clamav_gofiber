@@ -31,13 +31,21 @@ func New(config Config) fiber.Handler {
 		file, err := files.Open()
 
 		if err != nil {
-			return err
+			return ctx.JSON(domain.Response{
+				Status:  fiber.StatusBadRequest,
+				Message: err.Error(),
+				Data:    nil,
+			})
 		}
 
 		var abort chan bool
 		ch, err := c.ScanStream(file, abort)
 		if err != nil {
-			return err
+			return ctx.JSON(domain.Response{
+				Status:  fiber.StatusBadRequest,
+				Message: err.Error(),
+				Data:    nil,
+			})
 		}
 
 		response := <-ch
