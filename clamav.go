@@ -8,7 +8,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func New(config domain.Config) fiber.Handler {
+type Config struct {
+	ClamdAddress string // ClamdAddress is the address of the clamd daemon
+	FieldName    string // FieldName is the name of the field in the multipart form
+}
+
+func New(config Config) fiber.Handler {
 
 	c := command.NewClamd(config.ClamdAddress)
 
