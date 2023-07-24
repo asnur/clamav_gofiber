@@ -1,4 +1,4 @@
-package main
+package clamav
 
 import (
 	"fmt"
